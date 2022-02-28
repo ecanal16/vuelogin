@@ -14,7 +14,7 @@ const loggingOut = () => {
 <div class="text-indigo-500 bg-slate-400">
 <div class="container mx-auto flex items-center justify-between">
     <h1 class="text-3xl font-thin tracking-tighter">
-        Vue<span class="font-normal">FakeAuth</span>
+        Vue<span class="font-normal">RealAuth</span>
       </h1>
     <nav>
         <ul class="flex space-x-4">
