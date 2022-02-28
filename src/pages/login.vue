@@ -37,14 +37,14 @@ const { ready, start } = useTimeout(3000, { controls: true });
 
 <template>
 <div class="flex flex-col items-center justify-center  min-h-screen-nonav">
-    <div class="flex rounded-lg shadow-2xl bg-gray-200 overflow-hidden">
+    <div class="flex rounded-lg shadow-2xl bg-blue-600 overflow-hidden">
       <img class="h-64" src="../assets/bglogin.png" alt="hello background">
       <form @submit.prevent="loggingIn" class="flex flex-col p-4 space-y-4">
           <input type="text" class="border-2 p-2 rounded-lg" placeholder="Username" v-model="username">
           <input type="password" class="border-2 p-2 rounded-lg" placeholder="Password" v-model="password">
           <div class="flex space-x-2">
             <button @submit.prevent="loggingIn" type="submit" class="w-1/2 py-2 text-indigo-200 bg-indigo-500 rounded-lg">Login</button>
-            <button @click="signingUp" class="w-1/2 py-2 text-indigo-200 bg-indigo-500 rounded-lg">Sign Up</button>
+            <button @click="signingUp" class="w-1/2 py-2 bg-green-200 rounded-lg">Sign Up</button>
           </div>
           
       </form> 
