@@ -7,24 +7,32 @@ const isAuthenticated = ref(false);
 
 const user = ref("");
 
- const useAuth = () => {
-    const login = async (username, password) => {
-     const credentials = await createUserWithEmailAndPassword(firebaseAuth, username, password);
+const useAuth = () => {
+  const login = async (username, password) => {
+    const credentials = await signInWithEmailAndPassword(
+      firebaseAuth,
+      username,
+      password
+    );
 
-     if (credentials.user) {
-       isAuthenticated.value = true;
-       user.value = credentials.user.email;
-     }
-    };
+    if (credentials.user) {
+      isAuthenticated.value = true;
+      user.value = credentials.user.email;
+    }
+  };
 
   const signup = async (username, password) => {
-    const credentials = await signInWithEmailAndPassword(firebaseAuth, username, password);
- 
-      if (credentials.user) {
-        isAuthenticated.value = true;
-        user.value = credentials.user.email;
-      }
-     };
+    const credentials = await createUserWithEmailAndPassword(
+      firebaseAuth,
+      username,
+      password
+    );
+
+    if (credentials.user) {
+      isAuthenticated.value = true;
+      user.value = credentials.user.email;
+    }
+  };
   
   
     const logout = async () => {
