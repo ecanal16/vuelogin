@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import useAuth from '../composables/useAuth';
 import useError from "../composables/useError";
-const { isAuthenticated, login } = useAuth();
+const { isAuthenticated, login, signup } = useAuth();
 const username = ref("");
 const password = ref("");
 
@@ -11,6 +11,15 @@ const router = useRouter();
 
 const loggingIn = async () => {
   await login(username.value, password.value);
+  goToHome;
+};
+
+const signingUp = async () => {
+  await signup(username.value, password.value);
+  goToHome();
+};
+
+const goToHome = () => {
   if (isAuthenticated.value) {
     router.push("/");
   } else {
@@ -33,7 +42,11 @@ const { ready, start } = useTimeout(3000, { controls: true });
       <form @submit.prevent="loggingIn" class="flex flex-col p-4 space-y-4">
           <input type="text" class="border-2 p-2 rounded-lg" placeholder="Username" v-model="username">
           <input type="password" class="border-2 p-2 rounded-lg" placeholder="Password" v-model="password">
-          <button @submit.prevent="loggingIn" type="submit" class="py-2 text-indigo-200 bg-indigo-500 rounded-lg">Login</button>
+          <div class="flex space-x-2">
+            <button @submit.prevent="loggingIn" type="submit" class="w-1/2 py-2 text-indigo-200 bg-indigo-500 rounded-lg">Login</button>
+            <button @click="signingUp" class="w-1/2 py-2 text-indigo-200 bg-indigo-500 rounded-lg">Sign Up</button>
+          </div>
+          
       </form> 
     </div>
     <div v-if="!ready && error" class="absolute w-1/3 p-4 text-center text-red-800 bg-red-200 rounded-lg  bottom-2 right-2">{{ error }}</div>
