@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import useAuth from '../composables/useAuth';
+import useAuth from "../composables/useAuth";
 import useError from "../composables/useError";
 const { isAuthenticated, login, signup } = useAuth();
 const username = ref("");
@@ -11,7 +11,7 @@ const router = useRouter();
 
 const loggingIn = async () => {
   await login(username.value, password.value);
-  goToHome;
+  goToHome();
 };
 
 const signingUp = async () => {
