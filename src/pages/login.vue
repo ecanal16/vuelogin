@@ -1,11 +1,25 @@
 <script setup>
-import { ref } from "vue";
 import { useRouter } from "vue-router";
+
+import { useForm, useField} from 'vee-validate';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  username: yup.string().required().email().label("Email"),
+  password: yup.string().required().min(8).label("Password"),
+});
+
+useForm({
+  validationSchema: schema,
+});
+
+const { value: username, errorMessage: emailError } = useField("username");
+const { value: password, errorMessage: passwordError } = useField("password");
+
 import useAuth from "../composables/useAuth";
 import useError from "../composables/useError";
 const { isAuthenticated, login, signup, googleLogin } = useAuth();
-const username = ref("");
-const password = ref("");
+
 
 const router = useRouter();
 
@@ -45,8 +59,10 @@ const { ready, start } = useTimeout(3000, { controls: true });
     <div class="flex rounded-lg shadow-2xl bg-blue-600 overflow-hidden">
       <img class="h-64" src="../assets/bglogin.png" alt="hello background">
       <form @submit.prevent="loggingIn" class="flex flex-col p-4 space-y-4">
-          <input type="text" class="border-2 p-2 rounded-lg" placeholder="Username" v-model="username">
-          <input type="password" class="border-2 p-2 rounded-lg" placeholder="Password" v-model="password">
+          <input name="username" type="text" class="border-2 p-2 rounded-lg" placeholder="Email" v-model="username">
+          <span class="text-xs text-center bg-red-200 text-red-500">{{ emailError }}</span>
+          <input name="password" type="password" class="border-2 p-2 rounded-lg" placeholder="Password" v-model="password">
+          <span class="text-xs text-center bg-red-200 text-red-500">{{ passwordError }}</span>
           <div class="flex space-x-2">
             <button @submit.prevent="loggingIn" type="submit" class="w-1/2 py-2 text-indigo-200 bg-indigo-500 rounded-lg">Login</button>
             <button @click="signingUp" class="w-1/2 py-2 bg-green-200 rounded-lg">Sign Up</button>
