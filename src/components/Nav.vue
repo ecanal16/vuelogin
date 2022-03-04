@@ -14,7 +14,7 @@ const loggingOut = () => {
 <div class="text-pink-500 bg-blue-600">
 <div class="container mx-auto flex items-center justify-between">
     <h1 class="text-3xl font-thin tracking-tighter">
-        Vue<span class="font-normal">RealLogin</span>
+        Vue<span class="font-normal">RealLogin</span><span> with Google</span>
       </h1>
     <nav>
         <ul class="flex space-x-4">
